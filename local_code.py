@@ -74,6 +74,17 @@ def get_RTI():
     station_information = pd.DataFrame(data)
 
 
+def tt_mtx():
+    o = 72
+    d = 116
+    perc = 0.95
+    bins = 10
+
+    matrix = trips.groupby(by=['start station id', 'end station id'])  # pivot the trips for the matrix
+    durations = matrix.get_group((o, d)).tripduration  # access a single cell of the matrix
+    durations = durations[durations < durations.quantile(perc)]  # filter below the given percentile
+
+
 
 
 def plot_stations(stations):
