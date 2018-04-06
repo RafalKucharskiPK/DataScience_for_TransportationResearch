@@ -9,6 +9,7 @@ import numpy as np
 from shapely.geometry import Point
 import plotly.plotly as py
 from plotly.graph_objs import *
+import requests
 
 topsize = 30
 PLOTLY_API_KEY = "w1LROCX3bYA8amfuLA4g"
@@ -66,6 +67,14 @@ def make_stations(trips):
     st['pos'] = [Point(loc[0], loc[1]) for loc in locs]
     st['orig_trips'] = sizes
     st = st.set_index("station_id")
+
+def get_RTI():
+    json = requests.get("https://gbfs.citibikenyc.com/gbfs/en/station_information.json").json()
+    data = json['data']['stations']
+    station_information = pd.DataFrame(data)
+
+
+
 
 def plot_stations(stations):
     data = [Scattermapbox(
