@@ -30,7 +30,8 @@ def read_folder(path, plot=True):
             plot_x.append(file.split("-")[0])
             plot_y.append(dfs[-1].shape[0])
             print("Reading {}MB file of {:,} trips recorded on {}"
-                  .format(int(os.path.getsize(os.path.join(path, file)) / 1024 / 1024.0), dfs[-1].shape[0], file.split("-")[0]))
+                  .format(int(os.path.getsize(os.path.join(path, file)) / 1024 / 1024.0),
+                          dfs[-1].shape[0], file.split("-")[0]))
 
     dfs = pd.concat(dfs)
 
